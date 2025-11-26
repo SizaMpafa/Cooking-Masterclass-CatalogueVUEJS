@@ -1,4 +1,6 @@
 import './assets/main.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap'; // Imports Bootstrap's JavaScript
 
 import { createApp } from 'vue'
 import App from './App.vue'
