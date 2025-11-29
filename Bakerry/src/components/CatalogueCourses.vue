@@ -1,8 +1,12 @@
 <script>
+    import WishlistNavbar from './WishlistNavbar.vue';
     export default{
+        components:{
+            WishlistNavbar
+        },
         data(){
             return{
-                    courses: [
+                courses: [
     {
         "id": 1,
         "title": "Fundamentals of Italian Cooking",
@@ -41,7 +45,7 @@
         "skill": "Beginner",
         "availability": true,
         "imageSrc": "https://prodimage.images-bn.com/pimages/9781621455776_p3_v4_s600x595.jpg",
-        "isSaved": true
+        "isSaved": false
     },
     {
         "id": 5,
@@ -103,11 +107,11 @@
         "imageSrc": "https://assets3.thrillist.com/v1/image/3119896/792x529/scale;webp=auto;jpeg_quality=60;progressive.jpg",
         "isSaved": false
     }
-
+    
 ]
 
     }
-        },
+},
             methods: {
                 toggleSavingCourse(courseID){
                     const courseToUpdate = this.courses.find(course => course.id === courseID)
@@ -115,36 +119,41 @@
                     if(courseToUpdate){
                         courseToUpdate.isSaved = !courseToUpdate.isSaved
                     }
+                    
                 }
             },
             computed:{
-
+                
             }
-    }
-</script>
+        }
+    </script>
 
 <template>
-    <ul>
-        <li v-for="course in courses">
-            <div class="card" style="width: 50rem;">
-    <img :src="course.imageSrc" class="card-img-top" alt="Course image">
-    
-    <div class="card-body">
-      <h5 class="card-title">{{ course.title }}</h5>
-      <p class="card-text">
-        <strong>Chef:</strong> {{ course.chef }}
-      </p>
-      <p class="card-text">
-        <strong>Skill Level:</strong> {{ course.skill }}
-      </p>
-      <p class="card-text">
-        <strong>Price:</strong> {{ course.price }}
-      </p>
-      <button :class="['btn', course.isSaved ? 'btn-danger' : 'btn-success']" @click="toggleSavingCourse(course.id)">{{ course.isSaved ? "save course" : "course saved"}}</button>
+    <div class="container">
+        <WishlistNavbar :courses="courses"/>
+        <hr>
+        <ul>
+            <li v-for="course in courses" :key="course.id">
+                <div class="card" style="width: 50rem;">
+        <img :src="course.imageSrc" class="card-img-top" alt="Course image">
+        
+        <div class="card-body">
+          <h5 class="card-title">{{ course.title }}</h5>
+          <p class="card-text">
+            <strong>Chef:</strong> {{ course.chef }}
+          </p>
+          <p class="card-text">
+            <strong>Skill Level:</strong> {{ course.skill }}
+          </p>
+          <p class="card-text">
+            <strong>Price:</strong> {{ course.price }}
+          </p>
+          <button :class="['btn', course.isSaved ? 'btn-danger' : 'btn-success']" @click="toggleSavingCourse(course.id)">{{ course.isSaved ? "save course" : "course saved"}}</button>
+        </div>
+      </div>
+            </li>
+        </ul>
     </div>
-  </div>
-        </li>
-    </ul>
 </template>
 
 <style>
